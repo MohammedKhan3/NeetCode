@@ -1,0 +1,35 @@
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        '''
+        Understand: 
+        I am thinking of joining each element in string with "-" and then
+        and then string will split into list using -
+        but there will be issue for empty array then but there will be some issues so in that case 
+        you will get total number of elements in the group and add it to "-" and then add to string.
+
+        While decoding you will iterate thru each of them and add then until u see "-" and append to list 
+            algorithm is that we first find out total number of charcaters in string
+            then we will move i to begining of the word and j to the end of the word. and append
+            string from i to j.
+            and in the end update i and j.       
+        '''
+        res = ""
+
+        for s in strs:
+            res += str(len(s))+"-"+s
+        return res
+
+    def decode(self, s: str) -> List[str]:
+        i = 0
+        res = []
+        while i<len(s):
+            j = i
+            while(s[j]!="-"):
+                j = j+1
+            length = int(s[i:j])
+            i = j+1   # i is at j plus 1
+            j = i + length #moving to the end of the string    
+            res.append(s[i:j])
+            i = j
+        return res 
